@@ -115,12 +115,15 @@
 							</tr>
 							<tr>
 								<td>수정일</td>
-								<td>${bookVo.b_mod_date}</td>
+								<td>${name}</td>
 							</tr>
 						</table>
 					</li>
 				</ul>
-				<a class="recommendBtn" href="<c:url value='/newRecommend' />">GET RECOMMENDATION</a>
+				<a href="<c:url value='/recommend/getNewRecommend' />">
+				    <button>New Recommends</button>
+				</a>
+				
 			</div>
 		</div>
 		

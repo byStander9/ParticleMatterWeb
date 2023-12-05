@@ -1,0 +1,36 @@
+section {
+	margin: 30px 0;
+	}
+#section_wrap {
+	margin: auto 100px
+}
+#section_wrap .word {
+	margin: auto;
+	text-align: center;
+	}
+
+#section_wrap .book_detail {
+	margin: auto;
+	align: center
+	}
+#section_wrap .book_detail ul {
+	display: flex;
+}
+
+#section_wrap .book_detail ul li table {
+	min-width: 500px;
+	min-height: 300px;
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+#section_wrap .book_detail ul li table td {
+	border: 1px solid black;
+}
+#section_wrap .book_detail ul li table td:nth-child(1) {
+	text-align: center;
+	font-weight: bolder;
+}
+td {
+	min-width: 250px;
+	min-height: 50px;
+}

@@ -9,28 +9,32 @@ section {
 	text-align: center;
 	}
 
-#section_wrap .book_detail {
+#section_wrap .recommendation {
 	margin: auto;
 	align: center
 	}
-#section_wrap .book_detail ul {
+#section_wrap .recommendation ul {
 	display: flex;
 }
 
-#section_wrap .book_detail ul li table {
+#section_wrap .recommendation ul li table {
 	min-width: 500px;
 	min-height: 300px;
 	border-collapse: collapse;
 	border: 1px solid black;
 }
-#section_wrap .book_detail ul li table td {
+#section_wrap .recommendation ul li table td {
 	border: 1px solid black;
 }
-#section_wrap .book_detail ul li table td:nth-child(1) {
+#section_wrap .recommendation ul li table td:nth-child(1) {
 	text-align: center;
 	font-weight: bolder;
 }
 td {
 	min-width: 250px;
 	min-height: 50px;
+}
+
+#section_wrap .recommendBtn {
+	font-weight: bolder;
 }

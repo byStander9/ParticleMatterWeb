@@ -9,7 +9,7 @@
 
 <jsp:include page="../include/title.jsp" />
 
-<link href="<c:url value='/resources/css/admin/book_detail.css' />" rel="stylesheet" type="text/css">
+<link href="<c:url value='/resources/css/admin/main.css' />" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -27,7 +27,7 @@
 				
 			</div>
 			
-			<div class="book_detail">
+			<div class="recommendation">
 			
 				<ul>
 					<li>
@@ -79,7 +79,6 @@
 								<td>주소</td>
 								<td>${bookVo.b_publish_year}</td>
 							</tr>
-							
 							<tr>
 								<td>등록일</td>
 								<td>${bookVo.b_reg_date}</td>
@@ -121,10 +120,8 @@
 						</table>
 					</li>
 				</ul>
-				
+				<a class="recommendBtn" href="<c:url value='/newRecommend' />">GET RECOMMENDATION</a>
 			</div>
-			
-			
 		</div>
 		
 	</section>

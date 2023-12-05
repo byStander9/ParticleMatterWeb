@@ -35,7 +35,7 @@
 							<caption>미세먼지 수치 가장 낮은 지역</caption>
 							<tr>
 								<td>지역명</td>
-								<td>강원도</td>
+								<td>${lowestCities.get(0)}</td>
 							</tr>
 							<tr>
 								<td>통합대기환경수치</td>
@@ -94,7 +94,7 @@
 							<caption>추천 도서</caption>
 							<tr>
 								<td>지역명</td>
-								<td>강원도 wjdalswo</td>
+								<td>강원도</td>
 							</tr>
 							<tr>
 								<td>통합대기환경수치</td>
@@ -115,12 +115,12 @@
 							</tr>
 							<tr>
 								<td>수정일</td>
-								<td>${name}</td>
+								<td>${lowestCities.get(1)}</td>
 							</tr>
 						</table>
 					</li>
 				</ul>
-				<a href="<c:url value='/recommend/getNewRecommend' />">
+				<a href="<c:url value='/newPm/getNewPm' />">
 				    <button>New Recommends</button>
 				</a>
 				

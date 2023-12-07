@@ -56,8 +56,12 @@
 								<td>${bookVo.b_reg_date}</td>
 							</tr>
 							<tr>
-								<td>수정일</td>
-								<td>${bookVo.b_mod_date}</td>
+								 <th>
+									<form action="/newPm/getNewPm" method="post">
+										<input type="text" name="reccomNum" value="${reccomNum}">
+									    <button type="submit">New Recommends</button>
+									</form>
+								<th>
 							</tr>
 						</table>
 					</li>
@@ -121,9 +125,7 @@
 						</table>
 					</li>
 				</ul>
-				<a href="<c:url value='/newPm/getNewPm' />">
-				    <button>New Recommends</button>
-				</a>
+				
 				
 			</div>
 		</div>

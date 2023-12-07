@@ -12,23 +12,38 @@ import java.io.IOException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PmService {
 
-	public List<String> getTodayData() throws IOException {
+	@Autowired
+	PmDao pmDao;
+	
+	@Autowired
+	PMVo pmVo;
+	
+	public List<String> newTodayData() throws IOException {
 		System.out.println("[PmService] getTodayData()!");
 		List<String> lowestCities = new ArrayList<>();
 		try {
-			HashMap<String, Integer> citiesResult = new HashMap<String, Integer>();
+			// not needed
+			HashMap<String, Integer> cityResult;
+			HashMap<String, HashMap<String, Integer>> citiesResult = new HashMap<String, HashMap<String, Integer>>();
+			int khaiValE = 0;
+			int pm10ValE = 0;
+			int pm25ValE = 0;
 			// "서울", "부산", "대구", "인천", "광주", "대전", "울산", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "세종"
 			final String citiesName[] = {"서울", "부산", "대구"};
+			String[] properties = {"khaiValue", "pm10Value", "pm25Value"};
 			
-			for(String str : citiesName) {
-				System.out.print(str + " ");
-				String cityName = str;
-				int pm10ValE = 0;
+			for(String cityName : citiesName) {
+				System.out.print(cityName + " ");
+				khaiValE = 0;
+				pm10ValE = 0;
+				pm25ValE = 0;
+				cityResult  = new HashMap<String, Integer>();
 				int errorPassedNum = 0;
 				try {
 					String result = "";
@@ -53,27 +68,39 @@ public class PmService {
 			        JSONObject responseBody = (JSONObject)response.get("body");
 			        JSONArray responseBodyItems = (JSONArray)responseBody.get("items");
 			        
+			        
+			        // Getting "cityName", "khaiValue", "pm10Value", "pm25Value"
+			        khaiValE = 0;
 			        pm10ValE = 0;
+			        pm25ValE = 0;
 			        for(int i = 0; i < responseBodyItems.size(); i++) {
 			        	JSONObject tmpItem = (JSONObject)responseBodyItems.get(i);
-			        	System.out.print((String)tmpItem.get("pm10Value") + " ");
-			        	if(tmpItem.get("pm10Value").equals("-") || (tmpItem.get("pm10Value")).equals(null)) {
+			        	System.out.print((String)tmpItem.get("pm10Value") + " " + (String)tmpItem.get("pm25Value") + " " + (String)tmpItem.get("khaiValue") + "/ ");
+			        	if(tmpItem.get("pm10Value").equals("-") || (tmpItem.get("pm10Value")).equals(null) || tmpItem.get("pm25Value").equals("-") || (tmpItem.get("pm25Value")).equals(null) 
+			        			|| tmpItem.get("pm25Value").equals("-") || (tmpItem.get("pm25Value")).equals(null)) {
 			        		errorPassedNum++;
 			        		continue;
 			        	}
-			        		
-			        	pm10ValE += Integer.parseInt((String)tmpItem.get("pm10Value"));		        		
+			        	khaiValE += Integer.parseInt((String)tmpItem.get("khaiValue"));
+			        	pm10ValE += Integer.parseInt((String)tmpItem.get("pm10Value"));	
+			        	pm25ValE += Integer.parseInt((String)tmpItem.get("pm25Value"));	
 			        }
+			        khaiValE = khaiValE/(responseBodyItems.size()-errorPassedNum);
 			        pm10ValE = pm10ValE/(responseBodyItems.size()-errorPassedNum);
-			        System.out.println("\n" + pm10ValE);
+			        pm25ValE = pm25ValE/(responseBodyItems.size()-errorPassedNum);
+			        System.out.println("\n khaiValE: " + khaiValE + " pm10ValE: " + pm10ValE + " pm25ValE " + pm25ValE);
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
-				citiesResult.put(cityName, pm10ValE);
+				cityResult.put("khaiValE", khaiValE);
+				cityResult.put("pm10ValE", pm10ValE);
+				cityResult.put("pm25ValE", pm25ValE);
+				
+				citiesResult.put(cityName, cityResult);
 			}
 			System.out.println(citiesResult);
 			List<String> keySet = new ArrayList<>(citiesResult.keySet());
-			keySet.sort((o1, o2) -> citiesResult.get(o1).compareTo(citiesResult.get(o2)));
+			keySet.sort((o1, o2) -> citiesResult.get(o1).get("khaiValE").compareTo(citiesResult.get(o2).get("khaiValE")));
 
 			// pm10수치가 가장 낮은 도시 3개
 			lowestCities.add(keySet.get(0));
@@ -82,14 +109,27 @@ public class PmService {
 	        System.out.println(citiesResult.get(keySet.get(0)) + " : " + keySet.get(0));
 	        System.out.println(citiesResult.get(keySet.get(1)) + " : " + keySet.get(1));
 	        System.out.println(citiesResult.get(keySet.get(2)) + " : " + keySet.get(2));
+	        
+	        for(int i = 0; i < keySet.size(); i++) {
+	        	System.out.println("insert" + i + " ");
+	        	pmVo.setCity_name(keySet.get(i));
+	        	pmVo.setCity_airQuality(Integer.toString(citiesResult.get(keySet.get(i)).get("khaiValE")));
+	        	pmVo.setCity_pm10(Integer.toString(citiesResult.get(keySet.get(i)).get("pm10ValE")));
+	        	pmVo.setCity_pm2_5(Integer.toString(citiesResult.get(keySet.get(i)).get("pm25ValE")));
+	        	
+	        	int result = pmDao.insertPmData(pmVo);
+	        	System.out.println("result: " + result);
+	        }
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return lowestCities;
 	}
-	
-	public static void main(String args[]) throws IOException{
 		
+	public PMVo getTodayData() {
+		System.out.println("[PmService] getTodayData()");
 		
+		PMVo pmvo = pmDao.getTodayData();
+		return pmvo;
 	}
 }

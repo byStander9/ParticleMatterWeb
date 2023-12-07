@@ -1,35 +1,53 @@
 package com.hallym.getawayfrompm.recommend.pm;
 
+import org.springframework.stereotype.Component;
+
 import com.hallym.getawayfrompm.recommend.TopVo;
 
+@Component
 public class PMVo implements TopVo{
 	
-	String cityName;
-	String airQuality;
-	String pm10;
-	String pm2_5;
-	public String getCityName() {
-		return cityName;
+	int city_no;
+	String city_name;
+	String city_airQuality;
+	String city_pm10;
+	String city_pm2_5;
+	public int getCity_no() {
+		return city_no;
 	}
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
+	public void setCity_no(int city_no) {
+		this.city_no = city_no;
 	}
-	public String getAirQuality() {
-		return airQuality;
+	public String getCity_name() {
+		return city_name;
 	}
-	public void setAirQuality(String airQuality) {
-		this.airQuality = airQuality;
+	public void setCity_name(String city_name) {
+		this.city_name = city_name;
 	}
-	public String getPm10() {
-		return pm10;
+	public String getCity_airQuality() {
+		return city_airQuality;
 	}
-	public void setPm10(String pm10) {
-		this.pm10 = pm10;
+	public void setCity_airQuality(String city_airQuality) {
+		this.city_airQuality = city_airQuality;
 	}
-	public String getPm2_5() {
-		return pm2_5;
+	public String getCity_pm10() {
+		return city_pm10;
 	}
-	public void setPm2_5(String pm2_5) {
-		this.pm2_5 = pm2_5;
+	public void setCity_pm10(String city_pm10) {
+		this.city_pm10 = city_pm10;
 	}
+	public String getCity_pm2_5() {
+		return city_pm2_5;
+	}
+	public void setCity_pm2_5(String city_pm2_5) {
+		this.city_pm2_5 = city_pm2_5;
+	}
+	public String getUpload_date() {
+		return upload_date;
+	}
+	public void setUpload_date(String upload_date) {
+		this.upload_date = upload_date;
+	}
+	String upload_date;
+	
 }

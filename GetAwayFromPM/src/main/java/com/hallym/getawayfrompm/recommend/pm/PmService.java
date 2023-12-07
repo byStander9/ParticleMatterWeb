@@ -110,6 +110,8 @@ public class PmService {
 	        System.out.println(citiesResult.get(keySet.get(1)) + " : " + keySet.get(1));
 	        System.out.println(citiesResult.get(keySet.get(2)) + " : " + keySet.get(2));
 	        
+	        int deleteResult = pmDao.deleteAllPmData();
+	        System.out.println("Deleted all PmData!");
 	        for(int i = 0; i < keySet.size(); i++) {
 	        	System.out.println("insert" + i + " ");
 	        	pmVo.setCity_name(keySet.get(i));
@@ -126,10 +128,11 @@ public class PmService {
 		return lowestCities;
 	}
 		
-	public PMVo getTodayData() {
-		System.out.println("[PmService] getTodayData()");
-		
-		PMVo pmvo = pmDao.getTodayData();
-		return pmvo;
-	}
+//	public List<PMVo> getTodayData() {
+//		System.out.println("[PmService] getTodayData()");
+//		
+//		List<PMVo> pmvo = pmDao.getTodayData();
+//		
+//		return pmvo;
+//	}
 }

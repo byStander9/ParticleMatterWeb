@@ -10,7 +10,7 @@
 <jsp:include page="../include/title.jsp" />
 
 <link href="<c:url value='/resources/css/admin/main.css' />" rel="stylesheet" type="text/css">
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
 	
@@ -36,35 +36,34 @@
 							<caption>미세먼지 수치 가장 낮은 지역</caption>
 							<tr>
 								<td>지역명</td>
-								<td>${lowestCities.get(0)}</td>
+								<td id="city_name">Existing Data</td>
 							</tr>
 							<tr>
 								<td>통합대기환경수치</td>
-								<td>${bookVo.b_author}</td>
+								<td id="city_airQuality">Existing Data</td>
 							</tr>
 							<tr>
 								<td>미세먼지(PM10) 농도</td>
-								<td>${bookVo.b_publisher}</td>
+								<td id="city_pm10">Existing Data</td>
 							</tr>
 							<tr>
 								<td>초미세먼지(PM2.5) 농도</td>
-								<td>${bookVo.b_publish_year}</td>
+								<td id="city_pm2_5">Existing Data</td>
 							</tr>
 							
 							<tr>
 								<td>등록일</td>
-								<td>${bookVo.b_reg_date}</td>
+								<td>Existing Data</td>
 							</tr>
 							<tr>
-								 <th>
-									<form action="/newPm/getNewPm" method="post">
-										<input type="text" name="reccomNum" value="${reccomNum}">
-									    <button type="submit">New Recommends</button>
-									</form>
-								<th>
+								<td>다음제안</td>
+								<td>
+									<button type="button" onclick="loadNextInfo()">가져오기</button>
+								</td>
 							</tr>
 						</table>
 					</li>
+    
 					<li>
 						<table>
 							<caption>추천 여행지</caption>
@@ -126,7 +125,6 @@
 					</li>
 				</ul>
 				
-				
 			</div>
 		</div>
 		
@@ -136,5 +134,22 @@
 	
 	<jsp:include page="../include/footer.jsp" />
 	
+	<script>
+				        function loadNextInfo() {
+				            // Ajax를 사용하여 서버에서 새로운 정보를 가져옵니다.
+				            $.ajax({
+				                url: "getNewPm",  // 서버의 엔드포인트 URL
+				                method: "GET",
+				                success: function(data) {
+				                    // 성공적으로 데이터를 받아왔을 때 동적으로 내용을 업데이트합니다.
+				                    // 여기에서는 특정 행에 새로운 데이터를 추가하는 방식으로 예제를 작성했습니다.
+				                    $("#city_name").html(data);
+				                },
+				                error: function() {
+				                    alert("다음 정보를 가져오는 데 실패했습니다.");
+				                }
+				            });
+				        }
+				    </script>
 </body>
 </html>

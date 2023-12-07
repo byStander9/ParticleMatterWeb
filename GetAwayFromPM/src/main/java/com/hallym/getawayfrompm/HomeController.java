@@ -32,7 +32,7 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		String nextPage = "admin/main";
+		String nextPage = "/home";
 		
 		return nextPage;
 		

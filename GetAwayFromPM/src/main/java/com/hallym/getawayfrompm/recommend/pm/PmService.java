@@ -34,7 +34,7 @@ public class PmService {
 					String result = "";
 					
 					StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty"); /*URL*/
-			        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=ZN2TOxcu9ogGkBJ3U9s0PWTGDyxf%2Fg1frFf0fbgTzuUPm%2BvWNCU0%2BHhNLVpYju6619XW35OQPMZlGq0%2BhQwO1g%3D%3D"); /*Service Key*/
+			        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=oFRpPSnvjdJY9T81ZSVVRT0GXjX8P3u8Y3pl82Ic3GLriKfVT4XR3lfIuFD0P1tp8SzCuItLZ2Ge325MsEqGNw%3D%3D"); /*Service Key*/
 			        urlBuilder.append("&" + URLEncoder.encode("returnType","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*xml 또는 json*/
 			        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("5", "UTF-8")); /*한 페이지 결과 수*/
 			        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/

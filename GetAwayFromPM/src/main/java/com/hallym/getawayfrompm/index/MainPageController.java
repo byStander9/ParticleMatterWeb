@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainPageController {
 
-	@GetMapping("/main")
+	@GetMapping("/admin")
 	public String mainPage() {
 		
 		System.out.println("[MainPageController] mainPage Out");

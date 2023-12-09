@@ -76,45 +76,30 @@ public class PmDao {
 		return result;
 	}
 	
-//	public PMVo getTodayData(int pmDataIndex) {
-//		System.out.println("[PmDao] getTodayData()");
-//		
-//		String sql =  "SELECT * FROM lowestcities "
-//				+ "WHERE city_no LIKE ? ";
-//		
-//		PMVo pmvo = null;
-//		try {
-//					
-//					pmvo = jdbcTemplate.query(sql, new RowMapper<PMVo>() {
-//		
-//						@Override
-//						public PMVo mapRow(ResultSet rs, int rowNum) throws SQLException {
-//							
-//							PMVo bookVo = new PMVo();
-//							
-//							PMVo.setCity_name(rs.getString("b_no"));
-//							bookVo.setB_thumbnail(rs.getString("b_thumbnail"));
-//							bookVo.setB_name(rs.getString("b_name"));
-//							bookVo.setB_author(rs.getString("b_author"));
-//							bookVo.setB_publisher(rs.getString("b_publisher"));
-//							bookVo.setB_publish_year(rs.getString("b_publish_year"));
-//							bookVo.setB_isbn(rs.getString("b_isbn"));
-//							bookVo.setB_call_number(rs.getString("b_call_number"));
-//							bookVo.setB_rantal_able(rs.getInt("b_rantal_able"));
-//							bookVo.setB_reg_date(rs.getString("b_reg_date"));
-//							bookVo.setB_mod_date(rs.getString("b_mod_date"));
-//							
-//							return bookVo;
-//							
-//						}
-//						
-//					}, "%" + bookVo.getB_name() + "%");
-//					
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//					
-//				}
-//		
-//		return null;
-//	}
+	public List<PMVo> getTodayData() {
+		System.out.println("[PmDao] getTodayData()");
+		
+		String sql =  "SELECT * FROM lowestcities ";
+		
+		List<PMVo> pmvos = null;
+		try {
+					
+				pmvos = jdbcTemplate.query(sql, (resultSet, rowNum) -> {
+		            PMVo pmvo = new PMVo();
+		            pmvo.setCity_no(resultSet.getInt("city_no"));
+		            pmvo.setCity_name(resultSet.getString("city_name"));
+		            pmvo.setCity_airQuality(resultSet.getString("city_airQuality"));
+		            pmvo.setCity_pm10(resultSet.getString("city_pm10"));
+		            pmvo.setCity_pm2_5(resultSet.getString("city_pm2_5"));
+		            pmvo.setUpload_date(resultSet.getString("upload_date"));
+		            return pmvo;
+		        });
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+			}
+		
+		return pmvos;
+	}
 }

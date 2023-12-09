@@ -9,10 +9,6 @@
 	$(function() {
 		console.log('HEADER DOCUMENT READY!!');
 		
-		/*
-		console.log('---> ' + $(location).attr('href'));
-		console.log('---> ' + $(location).attr('pathname'));
-		*/
 		
 		let pathname = $(location).attr('pathname');
 		let isIncludeUser = pathname.includes('/user');
@@ -35,6 +31,7 @@
 		
 		<div class="menu">
 			<ul>
+				<li><a href="<c:url value='/pm/hardGetNewPm' />">Test:hardPushPmData</a></li>
 				<li><a class="user" href="<c:url value='/' />">USER HOME</a></li>
 				<li><a class="admin" href="<c:url value='/admin' />">ADMIN HOME</a></li>
 			</ul>

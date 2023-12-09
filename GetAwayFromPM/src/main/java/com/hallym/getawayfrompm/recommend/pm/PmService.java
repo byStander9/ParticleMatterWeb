@@ -24,7 +24,7 @@ public class PmService {
 	@Autowired
 	PMVo pmVo;
 	
-	public List<String> newTodayData() throws IOException {
+	public void newTodayData() throws IOException {
 		System.out.println("[PmService] getTodayData()!");
 		List<String> lowestCities = new ArrayList<>();
 		try {
@@ -35,8 +35,7 @@ public class PmService {
 			int pm10ValE = 0;
 			int pm25ValE = 0;
 			// "서울", "부산", "대구", "인천", "광주", "대전", "울산", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "세종"
-			final String citiesName[] = {"서울", "부산", "대구"};
-			String[] properties = {"khaiValue", "pm10Value", "pm25Value"};
+			final String citiesName[] = {"서울"};
 			
 			for(String cityName : citiesName) {
 				System.out.print(cityName + " ");
@@ -111,7 +110,7 @@ public class PmService {
 	        System.out.println(citiesResult.get(keySet.get(2)) + " : " + keySet.get(2));
 	        
 	        int deleteResult = pmDao.deleteAllPmData();
-	        System.out.println("Deleted all PmData!");
+	        System.out.println("Deleted all PmData status: " + deleteResult);
 	        for(int i = 0; i < keySet.size(); i++) {
 	        	System.out.println("insert" + i + " ");
 	        	pmVo.setCity_name(keySet.get(i));
@@ -125,14 +124,13 @@ public class PmService {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return lowestCities;
 	}
 		
-//	public List<PMVo> getTodayData() {
-//		System.out.println("[PmService] getTodayData()");
-//		
-//		List<PMVo> pmvo = pmDao.getTodayData();
-//		
-//		return pmvo;
-//	}
+	public List<PMVo> getTodayData() {
+		System.out.println("[PmService] getTodayData()");
+		
+		List<PMVo> pmvos = pmDao.getTodayData();
+		
+		return pmvos;
+	}
 }

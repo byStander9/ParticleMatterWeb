@@ -2,16 +2,19 @@ package com.hallym.getawayfrompm.recommend.pm;
 
 import org.springframework.stereotype.Component;
 
-import com.hallym.getawayfrompm.recommend.TopVo;
-
 @Component
-public class PMVo implements TopVo{
+public class PMVo{
 	
 	int city_no;
 	String city_name;
 	String city_airQuality;
 	String city_pm10;
 	String city_pm2_5;
+	String upload_date;
+	
+	public PMVo() {
+		
+	}
 	public int getCity_no() {
 		return city_no;
 	}
@@ -48,6 +51,6 @@ public class PMVo implements TopVo{
 	public void setUpload_date(String upload_date) {
 		this.upload_date = upload_date;
 	}
-	String upload_date;
+	
 	
 }

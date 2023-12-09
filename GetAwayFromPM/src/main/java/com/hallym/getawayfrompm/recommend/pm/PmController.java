@@ -16,50 +16,53 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
+@RequestMapping("/pm")
 public class PmController {
 
-//	gpt version code
-//	private String[] infoList = {"Info 1", "Info 2", "Info 3"};
 	private int pmDataIndex = 0;
     
 	@Autowired
 	PmService pmService;
 	
-	List<PMVo> pmvo = null;
+	List<PMVo> pmvos = new ArrayList<>();
 	
 	// Every 8am calls api, get PmData, delete existing last day data, insert new data
 	@Scheduled(cron = "0 0 8 * * ?")
+	@GetMapping("/getNewPm")
 	public void newTodayData() throws IOException {
 		System.out.println("[PmController] newTodayData()!");
-		List<String> lowestCities = new ArrayList<>();
 		try {
-			lowestCities = pmService.newTodayData();
+			pmService.newTodayData();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-//		pmvo = pmService.getTodayData();
+		pmvos = pmService.getTodayData();
+		
 	}
 	
-//	@GetMapping("/getNewPm")
-//	@ResponseBody
-//	public PMVo getTodayData(Model model) {
-//		System.out.println("[PmController] getTodayData()!");
-//		
-////		gpt version code
-////		if (currentIndex < infoList.length) {
-////            String nextInfo = infoList[currentIndex];
-////            currentIndex++;
-////            return nextInfo;
-////        } else {
-////            return "End of recommend. Press again";
-////        }
-//		
-//		if(pmDataIndex < 3) {
-//			PMVo todayDataVo = pmService.getTodayData(pmDataIndex);
-//			return todayDataVo;
-//		} else {
-//			pmDataIndex = 0;
-//			return null;
-//		}
-//	}
+	// For test - Get data from db and add to List<PMVo> pmvo
+	@GetMapping("/hardGetNewPm")
+	public String listTodayData() {
+		System.out.println("[PmController] listTodayData()");
+		
+		pmvos = pmService.getTodayData();
+		System.out.println("pmvos: " + pmvos.get(0).getCity_name());
+		return "./admin/main";
+	}
+	
+	// Get city one by one from List<PMVo> pmvo
+	@GetMapping("/getNextPmRec")
+	@ResponseBody
+	public PMVo getTodayData() {
+		System.out.println("[PmController] getTodayData()! - " + pmDataIndex);
+		System.out.println("todayData - " + pmvos.get(0).getCity_name());
+		if(pmDataIndex < 3) {
+			PMVo todayDataVo = pmvos.get(pmDataIndex);
+			pmDataIndex++;
+			return todayDataVo;
+		} else {
+			pmDataIndex = 0;
+			return null;
+		}
+	}
 }

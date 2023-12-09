@@ -9,22 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/recommend")
+@RequestMapping("/")
 public class RecommendController {
 
 	@Autowired
 	RecommendService recommendService;
 	
-	
-	@GetMapping("/getNewRecommend")
-	public String getNewRecommend(Model model) {
-		System.out.println("[RecommendController] getNewRecommend!");
+	@GetMapping("admin")
+	public String mainPage() {
 		
+		System.out.println("[MainPageController] mainPage Out");
 		String nextPage = "admin/main";
 		
-		recommendService.getNewRecommend();
-		
-		model.addAttribute("name", "Hello World");
 		return nextPage;
 	}
+	
 }

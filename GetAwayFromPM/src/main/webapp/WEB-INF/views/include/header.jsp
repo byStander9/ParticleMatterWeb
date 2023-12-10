@@ -25,20 +25,13 @@
 
 </script>
 
+   
 <header>
 	
 	<div id="header_wrap">
-		
-		<div class="menu">
-			<ul>
-				<li><a href="<c:url value='/pm/hardGetNewPm' />">Test:hardPushPmData</a></li>
-				<li><a class="user" href="<c:url value='/' />">USER HOME</a></li>
-				<li><a class="admin" href="<c:url value='/admin' />">ADMIN HOME</a></li>
-			</ul>
-		</div>
-		
 		<div class="title">
-			<h3>여행지 추천- Lower Particulate Matter</h3>
+			<a href = "<c:url value='/admin'/>"><img src="${pageContext.request.contextPath}/resources/image/thumbsUp.jpg"></a>
+			<h3><a class="admin" href="<c:url value='/admin' />">여행지 추천- Lower Particulate Matter</a></h3>
 		</div>
 		
 	</div>

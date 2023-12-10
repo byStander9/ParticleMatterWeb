@@ -13,7 +13,7 @@
     String rootPath = request.getServletContext().getRealPath("/");
 
     // 이미지의 상대 경로
-    String imagePath = "resources/image/lotte-world.jpg";
+    String imagePath = "resources/image/thumbsUp.jpg";
 
     // 이미지의 절대 경로
     String absoluteImagePath = rootPath + imagePath;
@@ -69,38 +69,38 @@
 				<ul>
 					<li>
 						<table>
-							<caption>미세먼지 수치 가장 낮은 지역</caption>
+							<caption>미세먼지 수치가 좋은 지역</caption>
 							<tr>
 								<td>지역명</td>
-								<td id="city_name">Existing Data</td>
+								<td id="city_name"></td>
 							</tr>
 							<tr>
 								<td>통합대기환경수치</td>
-								<td id="city_airQuality">Existing Data</td>
+								<td id="city_airQuality"></td>
 							</tr>
 							<tr>
 								<td>미세먼지(PM10) 농도</td>
-								<td id="city_pm10">Existing Data</td>
+								<td id="city_pm10">지역추천 대기중 - 하단 버튼을 눌러주세요</td>
 							</tr>
 							<tr>
 								<td>초미세먼지(PM2.5) 농도</td>
-								<td id="city_pm2_5">Existing Data</td>
+								<td id="city_pm2_5"></td>
 							</tr>
 							
 							<tr>
 								<td>등록일</td>
-								<td id="upload_date">Existing Data</td>
+								<td id="upload_date"></td>
 							</tr>
 							<tr>
 								<td>다음제안</td>
 								<td>
-									<button type="button" onclick="loadNextPmInfo()">가져오기</button>
+									<button type="button" onclick="loadNextPmInfo()">NEW</button>
 								</td>
 							</tr>
 						</table>
 					</li>
     
-					<li>
+					<li id="row">
 						<table>
 							<caption>추천 여행지</caption>
 							<tr>
@@ -109,57 +109,20 @@
 							</tr>
 							<tr>
 								<td>주소</td>
-								<td></td>
+								<td id="place_roadAddress">미세먼지를 먼저 확인하시고 하단 버튼을 눌러주세요</td>
 							</tr>
 							<tr>
-								<td>카테고리</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>사이트 링크</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>등록일</td>
-								<td></td>
+								<td>사이트</td>
+								<td> <a href="" id="place_link"></a></td>
 							</tr>
 							<tr>
 								<td>다음제안</td>
-								<td><button type="button" onclick="loadNextPlaceInfo()">가져오기</button></td>
+								<td><button type="button" onclick="loadNextPlaceInfo()">NEW</button></td>
 							</tr>
 						</table>
 						 <img id="placeImg" src="">
 					</li>
-					<li>
-						<table>
-							<caption>추천 도서</caption>
-							<tr>
-								<td>도서명</td>
-								<td>개미</td>
-							</tr>
-							<tr>
-								<td>저자</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>출판사</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>구매링크</td>
-								<td></td>
-							</tr>
-							
-							<tr>
-								<td>등록일</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>다음제안</td>
-								<td></td>
-							</tr>
-						</table>
-					</li>
+					
 				</ul>
 				
 			</div>
@@ -237,7 +200,10 @@
         
         function loadNextPlaceInfo() {
         	var city_name = $('#city_name').text();
-        	console.log(city_name)
+        	if(city_name == "") {
+        		alert('미세먼지 수치를 먼저 조회해주세요!');
+        		return;
+        	}
             $.ajax({
                 url: "/getawayfrompm/place/getNextPlaceRec", // 위에서 작성한 JSP 페이지의 경로
                 method: "GET",
@@ -248,7 +214,9 @@
                     }
                 	else {
                 		$("#place_name").html(response["place_name"])
-                		console.log("/getawayfrompm/" + response["place_img"])
+                		$("#place_roadAddress").html(response["place_roadAddress"])
+                		$("#place_link").html(response["place_link"])
+                		$("#place_link").attr('href', response["place_link"])
                 		$('#placeImg').attr('src', "/getawayfrompm/" + response["place_img"]);
                 	}
                 	

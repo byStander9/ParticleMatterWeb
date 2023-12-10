@@ -13,6 +13,7 @@ public class PlaceService {
 	PlaceDao placeDao;
 	
 	List<PlaceVo> placevos = new ArrayList<>();
+	int placeDataIndex = 0;
 	
 	public int getTodayData(String parameterValue) {
 		System.out.println("[PmService] getTodayData()");
@@ -22,12 +23,22 @@ public class PlaceService {
 		return 1;
 	}
 	
-	public PlaceVo getNextData(int placeDataIndex, String parameterValue) {
+	public PlaceVo getNextData(String parameterValue) {
+		
+		PlaceVo placevo = new PlaceVo();
 		if(placevos.size() == 0 || placevos.get(0).getCity_name() != parameterValue) {
 			getTodayData(parameterValue);
 		}
 		
-		return placevos.get(placeDataIndex);
+		if(placeDataIndex < placevos.size()) {
+			placevo = placevos.get(placeDataIndex);
+			placeDataIndex++;
+			return placevo;
+		} else {
+			placeDataIndex = 0;
+			return null;
+		}
+		
 	}
 	
 }

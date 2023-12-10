@@ -24,8 +24,7 @@
 				<c:if test="${loginedAdminMemberVo.a_m_id eq 'super admin'}">
 					<li><a href="<c:url value='/admin/member/listupAdmin' />">관리자목록</a></li>
 				</c:if>
-				
-				<li><a href="<c:url value='/admin/member/checked' />">즐겨찾기</a></li>
+			
 			</ul>
 		</div>
 		<%

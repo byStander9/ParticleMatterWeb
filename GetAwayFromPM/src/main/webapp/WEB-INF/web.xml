@@ -54,4 +54,15 @@
 		<url-pattern>/*</url-pattern>	
 	</filter-mapping>
 	<!-- 한글설정 END -->
+	
+	<!-- MIME Mapping -->
+	<mime-mapping>
+        <extension>jpg</extension>
+        <mime-type>image/jpeg</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>jpeg</extension>
+        <mime-type>image/jpeg</mime-type>
+    </mime-mapping>
+    
 </web-app>

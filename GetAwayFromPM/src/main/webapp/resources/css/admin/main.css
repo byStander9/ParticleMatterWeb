@@ -14,18 +14,21 @@ section {
 	align: center
 	}
 #section_wrap .recommendation ul {
+	align: center;
+}
+caption {
+	font-weight: bolder;
+}
+#row {
 	display: flex;
 }
-
 #section_wrap .recommendation ul li table {
 	min-width: 500px;
 	min-height: 300px;
 	border-collapse: collapse;
-	border: 1px solid black;
+	text-align: center;
 }
-#section_wrap .recommendation ul li table td {
-	border: 1px solid black;
-}
+
 #section_wrap .recommendation ul li table td:nth-child(1) {
 	text-align: center;
 	font-weight: bolder;
@@ -41,3 +44,9 @@ td {
 body {
 	background-color: #BDD6D2;
 }
+
+#placeImg {
+        max-width: 500px;
+        min-width: 400px;
+        height: auto;
+    }

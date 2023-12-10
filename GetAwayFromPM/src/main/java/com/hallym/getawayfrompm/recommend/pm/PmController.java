@@ -46,7 +46,12 @@ public class PmController {
 	@PostConstruct
 	public void init() {
 		System.out.println("[PmController] listTodayData()");
-		
+//		System.out.println("[PmController] newTodayData()!");
+//		try {
+//			pmService.newTodayData();
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//		}
 		int result = pmService.getTodayData();
 	}
 	

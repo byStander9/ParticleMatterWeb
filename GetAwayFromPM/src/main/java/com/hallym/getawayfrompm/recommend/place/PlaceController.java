@@ -13,7 +13,6 @@ public class PlaceController {
 	
 	@Autowired
 	PlaceService placeService;
-	int placeDataIndex = 0;
 	
 	
 	
@@ -21,14 +20,13 @@ public class PlaceController {
 	@GetMapping("/getNextPlaceRec")
 	@ResponseBody
 	public PlaceVo getNextData(@RequestParam("param") String parameterValue) {
-		System.out.println("[PlaceController] getNextData()! - " + placeDataIndex);
-		if(placeDataIndex < 3) {
-			PlaceVo todayDataVo = placeService.getNextData(placeDataIndex, parameterValue);
-			placeDataIndex++;
-			return todayDataVo;
-		} else {
-			placeDataIndex = 0;
+		
+		if(parameterValue == null) {
 			return null;
 		}
+		PlaceVo todayDataVo = placeService.getNextData(parameterValue);
+		
+		
+		return todayDataVo;
 	}
 }

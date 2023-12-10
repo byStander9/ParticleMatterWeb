@@ -2,6 +2,8 @@ package com.hallym.getawayfrompm.recommend.place;
 
 public class PlaceVo {
 
+	private int place_no;
+	private String city_name;
 	private String place_name;
 	private String place_link;
 	private String place_roadAddress;
@@ -29,6 +31,18 @@ public class PlaceVo {
 	}
 	public void setPlace_img(String place_img) {
 		this.place_img = place_img;
+	}
+	public int getPlace_no() {
+		return place_no;
+	}
+	public void setPlace_no(int place_no) {
+		this.place_no = place_no;
+	}
+	public String getCity_name() {
+		return city_name;
+	}
+	public void setCity_name(String city_name) {
+		this.city_name = city_name;
 	}
 	
 	

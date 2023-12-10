@@ -104,8 +104,8 @@
 						<table>
 							<caption>추천 여행지</caption>
 							<tr>
-								<td>lotte-world</td>
-								<td>대관령 양떼목장</td>
+								<td>관광지명</td>
+								<td id="place_name"></td>
 							</tr>
 							<tr>
 								<td>주소</td>
@@ -128,7 +128,7 @@
 								<td><button type="button" onclick="loadNextPlaceInfo()">가져오기</button></td>
 							</tr>
 						</table>
-						 <img id="placeImg" src="<%= contextPath + "/" + imagePath %>">
+						 <img id="placeImg" src="">
 					</li>
 					<li>
 						<table>
@@ -235,19 +235,33 @@
             });
         }
         
-        $.ajax({
-            url: 'your-ajax-handler.jsp', // 위에서 작성한 JSP 페이지의 경로
-            type: 'GET',
-            dataType: 'json',
-            success: function(response) {
-                // 성공적으로 파일 위치 주소를 가져왔을 때 이미지 태그에 지정
-                $('#imageElement').attr('src', response.fileContent);
-            },
-            error: function() {
-                // 실패했을 때의 처리
-                alert('Failed to fetch file content.');
-            }
-        });
+        function loadNextPlaceInfo() {
+        	var city_name = $('#city_name').text();
+        	console.log(city_name)
+            $.ajax({
+                url: "/getawayfrompm/place/getNextPlaceRec", // 위에서 작성한 JSP 페이지의 경로
+                method: "GET",
+                data: { param: city_name },
+                success: function(response) {
+                	if(!response) {
+                    	alert("모든 추천을 확인하셨습니다. 다시 보시려면 버튼을 눌러주세요.")
+                    }
+                	else {
+                		$("#place_name").html(response["place_name"])
+                		console.log("/getawayfrompm/" + response["place_img"])
+                		$('#placeImg').attr('src', "/getawayfrompm/" + response["place_img"]);
+                	}
+                	
+                    // 성공적으로 파일 위치 주소를 가져왔을 때 이미지 태그에 지정
+                    
+                },
+                error: function() {
+                    // 실패했을 때의 처리
+                    alert('Failed to fetch file content.');
+                }
+            });
+        }
+        
     </script>
 </body>
 </html>

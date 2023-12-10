@@ -23,10 +23,6 @@ public class PmDao {
 		List<String> args = new ArrayList<String>();
 		
 		String sql = "INSERT INTO lowestcities(";
-//		if(adminMemberVo.getA_m_id().equals("super admin")) {
-//			sql += "a_m_approval, ";
-//			args.add("1");
-//		}
 		
 		sql += "city_name, ";
 		args.add(pmVo.getCity_name());

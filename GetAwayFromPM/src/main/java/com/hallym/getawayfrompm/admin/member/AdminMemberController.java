@@ -54,7 +54,7 @@ public class AdminMemberController {
 	public String loginConfirm(AdminMemberVo adminMemberVo, HttpSession session) {
 		System.out.println("[AdminMemberController] loginConfirm()");
 		
-		String nextPage = "admin/member/login_ok";
+		String nextPage = "admin/main";
 		
 		AdminMemberVo loginedAdminMemberVo = adminMemberService.loginConfirm(adminMemberVo);
 		

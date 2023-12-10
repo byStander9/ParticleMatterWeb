@@ -1,18 +1,13 @@
 package com.hallym.getawayfrompm.recommend.pm;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import javax.annotation.PostConstruct;
 
 
 @Controller
@@ -24,8 +19,6 @@ public class PmController {
 	@Autowired
 	PmService pmService;
 	
-	List<PMVo> pmvos = new ArrayList<>();
-	
 	// Every 8am calls api, get PmData, delete existing last day data, insert new data
 	@Scheduled(cron = "0 0 8 * * ?")
 	@GetMapping("/getNewPm")
@@ -36,7 +29,7 @@ public class PmController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		pmvos = pmService.getTodayData();
+		int result = pmService.getTodayData();
 		
 	}
 	
@@ -45,19 +38,26 @@ public class PmController {
 	public String listTodayData() {
 		System.out.println("[PmController] listTodayData()");
 		
-		pmvos = pmService.getTodayData();
-		System.out.println("pmvos: " + pmvos.get(0).getCity_name());
-		return "./admin/main";
+		int result = pmService.getTodayData();
+		return "admin/main";
 	}
+	
+	// 서버가 실행되고 의존성 주입이 완료된 후 즉시 실행
+	@PostConstruct
+	public void init() {
+		System.out.println("[PmController] listTodayData()");
+		
+		int result = pmService.getTodayData();
+	}
+	
 	
 	// Get city one by one from List<PMVo> pmvo
 	@GetMapping("/getNextPmRec")
 	@ResponseBody
-	public PMVo getTodayData() {
+	public PMVo getNextData() {
 		System.out.println("[PmController] getTodayData()! - " + pmDataIndex);
-		System.out.println("todayData - " + pmvos.get(0).getCity_name());
 		if(pmDataIndex < 3) {
-			PMVo todayDataVo = pmvos.get(pmDataIndex);
+			PMVo todayDataVo = pmService.getNextData(pmDataIndex);
 			pmDataIndex++;
 			return todayDataVo;
 		} else {

@@ -24,6 +24,8 @@ public class PmService {
 	@Autowired
 	PMVo pmVo;
 	
+	List<PMVo> pmvos = new ArrayList<>();
+	
 	public void newTodayData() throws IOException {
 		System.out.println("[PmService] getTodayData()!");
 		List<String> lowestCities = new ArrayList<>();
@@ -126,11 +128,15 @@ public class PmService {
 		}
 	}
 		
-	public List<PMVo> getTodayData() {
+	public int getTodayData() {
 		System.out.println("[PmService] getTodayData()");
 		
-		List<PMVo> pmvos = pmDao.getTodayData();
+		pmvos = pmDao.getTodayData();
 		
-		return pmvos;
+		return 1;
+	}
+	
+	public PMVo getNextData(int pmDataIndex) {
+		return pmvos.get(pmDataIndex);
 	}
 }

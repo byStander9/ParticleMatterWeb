@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/")
 public class RecommendController {
 
 	@Autowired
 	RecommendService recommendService;
 	
-	@GetMapping("admin")
+	@GetMapping("/admin")
 	public String mainPage() {
 		
 		System.out.println("[MainPageController] mainPage Out");

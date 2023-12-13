@@ -11,13 +11,15 @@ section {
 
 #section_wrap .recommendation {
 	margin: auto;
-	align: center
+	align: center;
+	display: flex;
 	}
 #section_wrap .recommendation ul {
 	align: center;
 }
 caption {
 	font-weight: bolder;
+	font-size: 25px;
 }
 #row {
 	display: flex;
@@ -46,7 +48,31 @@ body {
 }
 
 #placeImg {
-        max-width: 500px;
-        min-width: 400px;
+        width: 350px;
         height: auto;
     }
+
+#star {
+	width: 50px;
+	height: 50px;
+	display: block;
+}
+
+#inputTextBox {
+	list-style-type: none; /* 목록의 기본 스타일 제거 */
+    padding: 0; /* 목록의 내부 여백 제거 */
+    display: flex; /* Flexbox를 사용하여 자식 li를 수직으로 배치 */
+    flex-direction: column; /* 자식 li를 세로(column)로 배치 */
+    align-items: center;
+}
+
+#pmCity {
+	width: 780px;
+}
+
+#place {
+    display: none;
+}
+button {
+	padding: 10px 30px;
+}

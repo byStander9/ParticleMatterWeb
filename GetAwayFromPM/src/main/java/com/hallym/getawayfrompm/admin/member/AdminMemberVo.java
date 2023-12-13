@@ -1,5 +1,8 @@
 package com.hallym.getawayfrompm.admin.member;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class AdminMemberVo {
 
 	int a_m_no;
@@ -73,4 +76,17 @@ public class AdminMemberVo {
 	public void setA_m_mod_date(String a_m_mod_date) {
 		this.a_m_mod_date = a_m_mod_date;
 	}
+	
+	@Override
+    public String toString() {
+        // 객체를 JSON 문자열로 변환하는 방법은 여러 가지가 있습니다.
+        // 여기서는 간단하게 ObjectMapper 사용
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

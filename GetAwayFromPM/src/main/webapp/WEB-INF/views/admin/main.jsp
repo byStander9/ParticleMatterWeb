@@ -56,6 +56,9 @@
 		<%
 		AdminMemberVo loginedAdminMemberVo = (AdminMemberVo) session.getAttribute("loginedAdminMemberVo");
 		if (loginedAdminMemberVo != null) {
+			%>
+	        <input type="hidden" id="loginedAdminMemberVo" value="<%= loginedAdminMemberVo %>" />
+	        <%
 		%>
 		
 			<div class="word">
@@ -66,7 +69,7 @@
 			
 			<div class="recommendation">
 			
-				<ul>
+				<ul id=pmCity>
 					<li>
 						<table>
 							<caption>미세먼지 수치가 좋은 지역</caption>
@@ -100,7 +103,7 @@
 						</table>
 					</li>
     
-					<li id="row">
+					<li id="place">
 						<table>
 							<caption>추천 여행지</caption>
 							<tr>
@@ -120,10 +123,20 @@
 								<td><button type="button" onclick="loadNextPlaceInfo()">NEW</button></td>
 							</tr>
 						</table>
-						 <img id="placeImg" src="">
+						 
 					</li>
 					
 				</ul>
+				<ul>
+					<li>
+						<img id="placeImg" src="">
+					</li>
+					<li>
+						<img src="resources/image/empty-star.png" id="star" onclick="showInputBox()">
+						<div id="inputTextBox"></div>
+					</li>
+				</ul>
+				
 				
 			</div>
 			<%
@@ -152,7 +165,6 @@
 			
 			<div class="find_password_create_account">
 				
-				<a href="<c:url value='/admin/member/findPasswordForm' />">find password</a>
 				<a href="<c:url value='/admin/member/createAccountForm' />">create account</a>
 				
 			</div>
@@ -196,6 +208,9 @@
                     alert("다음 정보를 가져오는 데 실패했습니다.");
                 }
             });
+            
+            var hiddenItem = document.getElementById("place");
+            hiddenItem.style.display = "list-item";
         }
         
         function loadNextPlaceInfo() {
@@ -230,6 +245,55 @@
             });
         }
         
+        function showInputBox() {
+        	// 노란색 별이미지로 변경
+        	$('#star').attr('src', "resources/image/filled-star.png");
+            // 텍스트 입력을 위한 div 엘리먼트 생성
+
+            // 입력창 생성
+            var inputField = document.createElement("input");
+            inputField.type = "text";
+            inputField.placeholder = "리뷰를 입력해주세요";
+
+            var placeName = $('#place_name').text();
+         	// JavaScript에서 가져와서 사용
+            var loginedAdminMemberVo = <%= loginedAdminMemberVo %>;
+            var userName = loginedAdminMemberVo.a_m_name;
+            console.log(userName);
+            // 저장 버튼 생성
+            var saveButton = document.createElement("button");
+            saveButton.innerHTML = "저장";
+            saveButton.onclick = function() {
+           		var review = inputField.value;
+	            // 입력된 텍스트를 서버로 전송하고 저장하는 로직을 추가해야 합니다.
+	            var xhr = new XMLHttpRequest();
+	            xhr.open("POST", "saveText?review=" + review + "&placeName=" + placeName + "&userName=" + userName, true);
+	            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	            xhr.onreadystatechange = function () {
+	                if (xhr.readyState === 4 && xhr.status === 200) {
+	                    alert(xhr.responseText);
+	                }
+	            };
+	            xhr.send();
+	        
+            
+	            // 입력창 닫기
+	            inputField.style.display = "none";
+	            saveButton.style.display = "none";
+	            $('#star').attr('src', "resources/image/empty-star.png");
+            };
+
+            inputField.style.width = "400px"; // 너비 설정
+            inputField.style.height = "350px"; // 높이 설정
+            // 생성한 엘리먼트들을 div에 추가
+            
+			
+            var inputTextBox = document.getElementById("inputTextBox");
+            // body에 추가
+            inputTextBox.appendChild(inputField);
+            inputTextBox.appendChild(saveButton);
+            
+        }
     </script>
 </body>
 </html>

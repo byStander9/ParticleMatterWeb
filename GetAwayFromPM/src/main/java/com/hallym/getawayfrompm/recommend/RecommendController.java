@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class RecommendController {
-
-	@Autowired
-	RecommendService recommendService;
 	
 	@GetMapping("/admin")
 	public String mainPage() {

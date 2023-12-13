@@ -1,13 +1,13 @@
 header {
 	width: 100%;
-	background-color: #f0f0f0;
+	background-color: #7b7bff;
 	border-bottom: 1px solid #d9d9d9;
 	}
 
 #header_wrap {
 	width: 1200px;
 	margin: 0 auto;
-	background-color: #2113ff;
+	background-color: #7b7bff;
 	
 	}
 
@@ -40,7 +40,7 @@ h3 {
 	display: flex;
 }
 
-img {
+#mainSymbol {
         max-width: 80px;
         height: auto;
     }

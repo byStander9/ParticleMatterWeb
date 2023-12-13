@@ -13,7 +13,7 @@ public class PlaceService {
 	PlaceDao placeDao;
 	
 	List<PlaceVo> placevos = new ArrayList<>();
-	int placeDataIndex = 0;
+	int placeDataIndex;
 	
 	public int getTodayData(String parameterValue) {
 		System.out.println("[PmService] getTodayData()");
@@ -26,7 +26,8 @@ public class PlaceService {
 	public PlaceVo getNextData(String parameterValue) {
 		
 		PlaceVo placevo = new PlaceVo();
-		if(placevos.size() == 0 || placevos.get(0).getCity_name() != parameterValue) {
+		if(placevos.size() == 0 || !placevos.get(0).getCity_name().equals(parameterValue)) {
+			placeDataIndex = 0;
 			getTodayData(parameterValue);
 		}
 		
@@ -38,6 +39,7 @@ public class PlaceService {
 			placeDataIndex = 0;
 			return null;
 		}
+		
 		
 	}
 	

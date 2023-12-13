@@ -30,7 +30,7 @@
 	
 	<div id="header_wrap">
 		<div class="title">
-			<a href = "<c:url value='/admin'/>"><img src="${pageContext.request.contextPath}/resources/image/thumbsUp.jpg"></a>
+			<a href = "<c:url value='/admin'/>"><img id="mainSymbol" src="${pageContext.request.contextPath}/resources/image/thumbsUp.png"></a>
 			<h3><a class="admin" href="<c:url value='/admin' />">여행지 추천- Lower Particulate Matter</a></h3>
 		</div>
 		

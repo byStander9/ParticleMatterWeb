@@ -30,7 +30,6 @@ public class PmService {
 		System.out.println("[PmService] getTodayData()!");
 		List<String> lowestCities = new ArrayList<>();
 		try {
-			// not needed
 			HashMap<String, Integer> cityResult;
 			HashMap<String, HashMap<String, Integer>> citiesResult = new HashMap<String, HashMap<String, Integer>>();
 			int khaiValE = 0;

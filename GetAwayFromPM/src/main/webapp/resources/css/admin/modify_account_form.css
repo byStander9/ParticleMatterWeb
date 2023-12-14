@@ -33,3 +33,7 @@ section {
 #section_wrap .modify_account_form input[type='reset'] {
 	width: 156px;
 	}
+	
+body {
+	background-color: #BDD6D2;
+	}

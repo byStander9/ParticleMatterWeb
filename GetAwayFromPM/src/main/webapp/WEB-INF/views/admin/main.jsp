@@ -183,13 +183,10 @@
 	
 	<script>
         function loadNextPmInfo() {
-            // Ajax를 사용하여 서버에서 새로운 정보를 가져옵니다.
             $.ajax({
                 url: "pm/getNextPmRec",  // 서버의 엔드포인트 URL
                 method: "GET",
                 success: function(data) {
-                    // 성공적으로 데이터를 받아왔을 때 동적으로 내용을 업데이트합니다.
-                    // 여기에서는 특정 행에 새로운 데이터를 추가하는 방식으로 예제를 작성했습니다.
                     
                     if(!data) {
                     	alert("모든 추천을 확인하셨습니다. 다시 보시려면 버튼을 눌러주세요.")
@@ -234,8 +231,6 @@
                 		$("#place_link").attr('href', response["place_link"])
                 		$('#placeImg').attr('src', "/getawayfrompm/" + response["place_img"]);
                 	}
-                	
-                    // 성공적으로 파일 위치 주소를 가져왔을 때 이미지 태그에 지정
                     
                 },
                 error: function() {
@@ -248,7 +243,6 @@
         function showInputBox() {
         	// 노란색 별이미지로 변경
         	$('#star').attr('src', "resources/image/filled-star.png");
-            // 텍스트 입력을 위한 div 엘리먼트 생성
 
             // 입력창 생성
             var inputField = document.createElement("input");
@@ -256,7 +250,6 @@
             inputField.placeholder = "리뷰를 입력해주세요";
 
             var placeName = $('#place_name').text();
-         	// JavaScript에서 가져와서 사용
             var loginedAdminMemberVo = <%= loginedAdminMemberVo %>;
             var userName = loginedAdminMemberVo.a_m_name;
             console.log(userName);
@@ -265,7 +258,6 @@
             saveButton.innerHTML = "저장";
             saveButton.onclick = function() {
            		var review = inputField.value;
-	            // 입력된 텍스트를 서버로 전송하고 저장하는 로직을 추가해야 합니다.
 	            var xhr = new XMLHttpRequest();
 	            xhr.open("POST", "saveText?review=" + review + "&placeName=" + placeName + "&userName=" + userName, true);
 	            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -285,11 +277,9 @@
 
             inputField.style.width = "400px"; // 너비 설정
             inputField.style.height = "350px"; // 높이 설정
-            // 생성한 엘리먼트들을 div에 추가
             
 			
             var inputTextBox = document.getElementById("inputTextBox");
-            // body에 추가
             inputTextBox.appendChild(inputField);
             inputTextBox.appendChild(saveButton);
             

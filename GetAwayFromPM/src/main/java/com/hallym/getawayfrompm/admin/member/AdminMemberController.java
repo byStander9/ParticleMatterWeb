@@ -103,10 +103,7 @@ public class AdminMemberController {
 		return nextPage;
 	}
 	
-	/*
-	 * 회원정보 수정
-	 */
-//	@RequestMapping(value = "/modifyAccountForm", method = RequestMethod.GET)
+
 	@GetMapping("/modifyAccountForm")
 	public String modifyAccountForm(HttpSession session) {
 		System.out.println("[AdminMemberController] modifyAccountForm()");
@@ -121,10 +118,7 @@ public class AdminMemberController {
 		
 	}
 	
-	/*
-	 * 회원정보 수정 확인
-	 */
-//	@RequestMapping(value = "/modifyAccountConfirm", method = RequestMethod.POST)
+
 	@PostMapping("/modifyAccountConfirm")
 	public String modifyAccountConfirm(AdminMemberVo adminMemberVo, HttpSession session) {
 		System.out.println("[AdminMemberController] modifyAccountConfirm()");
